@@ -4,6 +4,9 @@ import "./globals.css";
 const siteUrl = "https://muhammad-wahyu-portfolio.vercel.app";
 
 export const metadata: Metadata = {
+  verification: {
+  google: "f02e06L2CwJKBzzom5Z76xUUuGxTThBAXfxW85fbLBc",
+},
   metadataBase: new URL(siteUrl),
   title: {
     default: "Muhammad Wahyu Anggana | Web Developer & Application Support",
