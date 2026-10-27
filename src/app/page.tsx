@@ -2,312 +2,434 @@ import Image from "next/image";
 import {
   ArrowDownRight,
   ArrowUpRight,
+  Download,
   Github,
   Instagram,
   Linkedin,
+  Mail,
   MapPin,
-  Phone,
 } from "lucide-react";
+import { MotionLayer } from "@/components/MotionLayer";
+import { PrintButton } from "@/components/PrintButton";
+import { PrintPortfolio } from "@/components/PrintPortfolio";
+import { portfolio } from "@/data/portfolio";
 
-const projects = [
-  {
-    index: "01",
-    title: "Jagadhita Digital",
-    eyebrow: "Company Profile / Digital Services",
-    description:
-      "Website company profile dan layanan digital PT Jagadhita Digital Nusantara. Fokus pada komunikasi layanan yang jelas, struktur informasi yang rapi, dan kebutuhan bisnis.",
-    image: "/images/jagadhita.png",
-    href: "https://www.jagadhitadigital.com/",
-    stack: ["Web Development", "Content", "Digital Operations"],
-  },
-  {
-    index: "02",
-    title: "Sistem Arsip Digital PDAM",
-    eyebrow: "Internal Tool / Customer Archive",
-    description:
-      "Sistem arsip pelanggan berbasis web untuk memusatkan dokumen, metadata pelanggan, pencarian, dan akses arsip dalam satu alur kerja digital.",
-    image: "/images/arsip-pdam.png",
-    href: "https://arsip-pdam.vercel.app/",
-    stack: ["Next.js", "Supabase", "Cloud Storage"],
-  },
-];
+const {
+  person,
+  facts,
+  projects,
+  experience,
+  education,
+  organizations,
+  capabilities,
+  certificates,
+  languages,
+} = portfolio;
 
-const experience = [
-  {
-    period: "2025 — sekarang",
-    role: "Area Operations & Marketing Manager",
-    company: "PT Jagadhita Digital Nusantara",
-    description:
-      "Mengelola operasional lima cabang rental iPhone, strategi promosi, evaluasi target cabang, dan koordinasi kebutuhan digital.",
-  },
-  {
-    period: "2024",
-    role: "Web Developer Intern",
-    company: "PDAM Tirta Moedal Kota Semarang",
-    description:
-      "Mengembangkan sistem arsip pelanggan berbasis web untuk mempercepat pencarian dan pengelolaan dokumen pelanggan.",
-  },
-  {
-    period: "2023",
-    role: "Humas Prodi · Freelance",
-    company: "Universitas Muhammadiyah Semarang",
-    description:
-      "Mengelola website program studi dan kanal media sosial untuk mendukung penyampaian informasi digital secara konsisten.",
-  },
-  {
-    period: "2024",
-    role: "Kepala Departemen Ristek",
-    company: "Himpunan Mahasiswa Informatika",
-    description:
-      "Mengkoordinasikan kegiatan riset dan teknologi serta kolaborasi program kerja organisasi.",
-  },
-];
-
-const skillGroups = [
-  {
-    title: "Development",
-    items: ["Next.js", "PHP", "Supabase", "Back-End Integration", "GitHub"],
-  },
-  {
-    title: "Data & AI",
-    items: ["Python", "Google Colab", "Machine Learning", "Data Processing"],
-  },
-  {
-    title: "Design & Workflow",
-    items: ["UI/UX", "Web Design", "Microsoft Office", "Digital Operations"],
-  },
-];
-
-const certs = [
-  ["Pemasaran Digital dengan AI untuk Wirausaha", "10rfDNDwg5F32CiLYVZbKTv99qHS2KZjI"],
-  ["Ethical Hacker For Dummies", "1Nfr8QrfjBTmvXWoPkFFLHERs27OTsW8_"],
-  ["AI Engineer For Milenial", "1bbzuAKT5AQP8aaRbkUEBpQHd3hdq-g7C"],
-  ["Social Media Management untuk Brand Digital", "15tSf7E4I5ZF_Dyz5QwbNS-jRRpFuhR6S"],
-  ["Menjaga Data Pribadi dan Pelindungannya", "1xvh6wDjnnisOe179tVXNT9E_-RBZe2v9"],
-  ["Produk Digital dan Desain Grafis", "1V8IhaepxSArYe_hLN3ASc_z_v8S0g9TB"],
-  ["Editing Video untuk Konten Produk", "1pse4cmpOZmild0ifhDwii9PuKCVFViCv"],
-  ["Aspek Pengembangan Produk AI", "1th24adOgS19eBYuHcekH5YiNLH1Se4OD"],
-  ["Optimasi Instagram dengan Insight", "1xvEVayCNsMiL1B_kDnj9NZy_faZ7YT7B"],
-  ["Keamanan Digital: Perlindungan Diri di Dunia Maya", "1G6HUjMSRKK6iiiiVahnuubw2UUc2T3o5"],
-  ["Image & Speech Recognition", "1kTc4lxp2s1H2yWMadM-JpG-QCZzokDDD"],
-];
+function SectionHead({ index, label, title, note }: { index: string; label: string; title: string; note?: string }) {
+  return (
+    <div className="section-head" data-reveal>
+      <div className="section-head-index">{index}</div>
+      <div className="section-head-copy">
+        <span className="section-head-label">{label}</span>
+        <h2>{title}</h2>
+      </div>
+      {note ? <p>{note}</p> : null}
+    </div>
+  );
+}
 
 export default function Home() {
+  const marqueeItems = [
+    "Next.js",
+    "TypeScript",
+    "Supabase",
+    "Application Support",
+    "Zabbix",
+    "Grafana",
+    "Git / GitHub",
+    "Problem Solving",
+  ];
+
   return (
-    <main id="top">
-      <header className="site-header">
-        <div className="container nav-row">
-          <a href="#top" className="brand" aria-label="Muhammad Wahyu Anggana">
-            Muhammad Wahyu Anggana
+    <>
+      <div className="screen-site">
+        <MotionLayer />
+        <div className="ambient-field" aria-hidden="true">
+          <span className="ambient-orb ambient-orb-a" />
+          <span className="ambient-orb ambient-orb-b" />
+          <span className="ambient-orb ambient-orb-c" />
+          <span className="ambient-grid" />
+        </div>
+
+        <header className="site-header">
+          <a href="#top" className="wordmark magnetic" data-magnetic aria-label="Kembali ke atas">
+            MWA<span>.</span>
           </a>
-          <nav className="nav-links" aria-label="Navigasi utama">
-            <a href="#work">Work</a>
-            <a href="#experience">Experience</a>
-            <a href="#about">About</a>
-            <a href="#certificates">Certificates</a>
+
+          <nav className="site-nav" aria-label="Navigasi portfolio">
+            <a href="#work" data-nav="work">Work</a>
+            <a href="#experience" data-nav="experience">Experience</a>
+            <a href="#capabilities" data-nav="capabilities">Capabilities</a>
+            <a href="#credentials" data-nav="credentials">Credentials</a>
           </nav>
-          <a className="nav-contact" href="mailto:wahyuanggana86@gmail.com">
-            Contact <ArrowUpRight size={15} />
-          </a>
-        </div>
-      </header>
 
-      <section className="hero container">
-        <div className="hero-copy">
-          <div className="hero-meta">
-            <span>Semarang, Indonesia</span>
-            <span className="availability"><i /> Open to opportunities</span>
-          </div>
-
-          <h1>
-            Web developer focused on <span>useful digital products.</span>
-          </h1>
-
-          <div className="hero-bottom">
-            <p>
-              Saya Muhammad Wahyu Anggana, fresh graduate Informatika yang bekerja di area web development,
-              data processing, dan digital operations.
-            </p>
-            <a className="hero-link" href="#work">
-              Selected work <ArrowDownRight size={17} />
+          <div className="header-actions">
+            <PrintButton />
+            <a className="header-contact magnetic" data-magnetic href={`mailto:${person.email}`}>
+              Contact <ArrowUpRight size={14} />
             </a>
           </div>
-        </div>
+        </header>
 
-        <figure className="hero-portrait">
-          <Image
-            src="/images/profile.png"
-            alt="Muhammad Wahyu Anggana"
-            width={900}
-            height={1100}
-            priority
-          />
-          <figcaption>
-            <span>Muhammad Wahyu Anggana</span>
-            <span>Web Development / IT / Digital Operations</span>
-          </figcaption>
-        </figure>
-      </section>
+        <main id="top">
+          <section className="hero shell">
+            <div className="hero-topline" data-reveal>
+              <span>Portfolio / 2026</span>
+              <span>{person.location}</span>
+              <span>Available for opportunities</span>
+            </div>
 
-      <section id="work" className="section work-section">
-        <div className="container">
-          <div className="section-head">
-            <span className="section-label">Selected work</span>
-            <h2>Project yang menunjukkan cara saya memecahkan masalah.</h2>
-          </div>
-
-          <div className="work-list">
-            {projects.map((project) => (
-              <article className="project-row" key={project.title}>
-                <a className="project-image-link" href={project.href} target="_blank" rel="noreferrer">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    width={1600}
-                    height={1000}
-                    className="project-image"
-                  />
-                </a>
-
-                <div className="project-copy">
-                  <div className="project-topline">
-                    <span>{project.index}</span>
-                    <span>{project.eyebrow}</span>
-                  </div>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <div className="project-stack">
-                    {project.stack.map((item) => <span key={item}>{item}</span>)}
-                  </div>
-                  <a className="inline-link" href={project.href} target="_blank" rel="noreferrer">
-                    View project <ArrowUpRight size={16} />
-                  </a>
+            <div className="hero-grid">
+              <div className="hero-copy">
+                <div className="hero-role" data-reveal>
+                  <span>{person.primaryRole}</span>
+                  <span className="hero-role-cycle" aria-hidden="true">
+                    <i>WEB SYSTEMS</i>
+                    <i>APPLICATION SUPPORT</i>
+                    <i>IT OPERATIONS</i>
+                  </span>
                 </div>
+
+                <h1 className="hero-title" aria-label={person.name}>
+                  <span className="reveal-line"><span>Muhammad Wahyu</span></span>
+                  <span className="reveal-line"><span className="accent-word">Anggana</span></span>
+                </h1>
+
+                <div className="hero-bottom" data-reveal>
+                  <p>{person.statement}</p>
+                  <div className="hero-actions">
+                    <a className="primary-link magnetic" data-magnetic href="#work">
+                      Selected work <ArrowDownRight size={16} />
+                    </a>
+                    <a className="secondary-link magnetic" data-magnetic href={person.cv.web} target="_blank" rel="noreferrer">
+                      <Download size={15} /> CV Web Developer
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="hero-visual" data-reveal>
+                <div className="portrait-card" data-tilt>
+                  <div className="portrait-grid" aria-hidden="true" />
+                  <Image
+                    src="/images/profile.png"
+                    alt="Muhammad Wahyu Anggana"
+                    fill
+                    sizes="(max-width: 780px) 82vw, 29vw"
+                    priority
+                  />
+                  <span className="portrait-tag portrait-tag-a">WEB</span>
+                  <span className="portrait-tag portrait-tag-b">APP SUPPORT</span>
+                  <span className="portrait-marker portrait-marker-a" aria-hidden="true">+</span>
+                  <span className="portrait-marker portrait-marker-b" aria-hidden="true">+</span>
+                </div>
+                <div className="portrait-meta">
+                  <span>Fresh Graduate · S1 Informatika</span>
+                  <span>Semarang, Indonesia</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="hero-facts" data-reveal>
+              {facts.map((fact) => (
+                <div className="hero-fact" key={fact.label}>
+                  <strong>{fact.value}</strong>
+                  <span>{fact.label}</span>
+                </div>
+              ))}
+              <div className="hero-alt-cv">
+                <a href={person.cv.it} target="_blank" rel="noreferrer">
+                  <Download size={14} /> CV IT Support / Network
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <div className="marquee" aria-hidden="true">
+            <div className="marquee-track">
+              {[...marqueeItems, ...marqueeItems].map((item, index) => (
+                <span key={`${item}-${index}`}><i />{item}</span>
+              ))}
+            </div>
+          </div>
+
+          <section className="approach shell" data-reveal>
+            <div className="approach-copy">
+              <span className="micro-label">How I work</span>
+              <h2>Teknologi yang terasa <em>berguna</em>, bukan sekadar terlihat kompleks.</h2>
+              <p>
+                Saya tertarik pada pekerjaan yang dimulai dari masalah nyata: memahami kebutuhan pengguna,
+                merapikan alur, lalu mengubahnya menjadi sistem yang lebih mudah dipakai dan dipelihara.
+              </p>
+            </div>
+
+            <div className="approach-steps">
+              <article>
+                <span>01</span>
+                <div><strong>Understand</strong><p>Memahami konteks pengguna dan proses kerja.</p></div>
+                <ArrowUpRight size={18} />
               </article>
-            ))}
-          </div>
-        </div>
-      </section>
+              <article>
+                <span>02</span>
+                <div><strong>Structure</strong><p>Menyederhanakan data, informasi, dan alur aplikasi.</p></div>
+                <ArrowUpRight size={18} />
+              </article>
+              <article>
+                <span>03</span>
+                <div><strong>Build</strong><p>Mengimplementasikan solusi yang bisa digunakan dan dirawat.</p></div>
+                <ArrowUpRight size={18} />
+              </article>
+            </div>
+          </section>
 
-      <section id="experience" className="section container split-section">
-        <div className="section-aside">
-          <span className="section-label">Experience</span>
-          <p>
-            Pengalaman saya berada di persimpangan antara pengembangan produk digital, komunikasi,
-            dan operasional.
-          </p>
-        </div>
+          <section className="motion-stage" aria-label="Cara saya bekerja">
+            <div className="motion-stage-grid" aria-hidden="true" />
+            <div className="motion-stage-glow motion-stage-glow-a" aria-hidden="true" />
+            <div className="motion-stage-glow motion-stage-glow-b" aria-hidden="true" />
+            <div className="motion-stage-inner shell">
+              <div className="motion-stage-topline">
+                <span>PROCESS / 03 MOVES</span>
+                <span>SCROLL TO EXPLORE</span>
+              </div>
+              <div className="motion-stage-words">
+                <article className="motion-word" data-motion-word>
+                  <span className="motion-word-index">01</span>
+                  <h2>BUILD</h2>
+                  <p>Mengubah kebutuhan menjadi sistem web yang bisa digunakan.</p>
+                </article>
+                <article className="motion-word" data-motion-word>
+                  <span className="motion-word-index">02</span>
+                  <h2>SUPPORT</h2>
+                  <p>Menjaga informasi, alur aplikasi, dan kebutuhan pengguna tetap berjalan.</p>
+                </article>
+                <article className="motion-word" data-motion-word>
+                  <span className="motion-word-index">03</span>
+                  <h2>IMPROVE</h2>
+                  <p>Merapikan proses agar lebih cepat, jelas, dan mudah dipelihara.</p>
+                </article>
+              </div>
+              <div className="motion-stage-meter" aria-hidden="true"><span /></div>
+            </div>
+          </section>
 
-        <div className="experience-list">
-          {experience.map((item) => (
-            <article className="experience-row" key={`${item.role}-${item.period}`}>
-              <div className="experience-period">{item.period}</div>
+          <section id="work" className="section shell">
+            <SectionHead
+              index="01"
+              label="Selected work"
+              title="Project yang punya konteks nyata."
+              note="Dua project utama yang paling mewakili pengalaman saya membangun dan mengelola sistem web."
+            />
+
+            <div className="project-list">
+              {projects.map((project, index) => (
+                <article className={`project-row ${index % 2 ? "project-row-reverse" : ""}`} key={project.id} data-reveal data-project-story data-project-index={index}>
+                  <a
+                    className="project-media"
+                    href={project.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    data-project-card
+                    aria-label={`Buka ${project.title}`}
+                  >
+                    <Image src={project.image} alt={project.title} fill sizes="(max-width: 900px) 100vw, 58vw" />
+                    <div className="project-scan" aria-hidden="true" />
+                    <span className="project-pointer" aria-hidden="true">VIEW ↗</span>
+                    <div className="project-frame" aria-hidden="true">
+                      <span>{project.category}</span>
+                      <span>{project.year}</span>
+                    </div>
+                  </a>
+
+                  <div className="project-content">
+                    <div className="project-progress" aria-hidden="true"><span /></div>
+                    <div className="project-number">{project.id}</div>
+                    <p className="project-org">{project.organization}</p>
+                    <h3>{project.title}</h3>
+                    <p className="project-role">{project.role}</p>
+                    <p className="project-description">{project.description}</p>
+
+                    <ul className="project-contribution">
+                      {project.contribution.map((item) => <li key={item}>{item}</li>)}
+                    </ul>
+
+                    <div className="project-stack">
+                      {project.stack.map((item) => <span key={item}>{item}</span>)}
+                    </div>
+
+                    <a className="project-link magnetic" data-magnetic href={project.href} target="_blank" rel="noreferrer">
+                      Open live project <ArrowUpRight size={15} />
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section id="experience" className="section section-soft">
+            <div className="shell">
+              <SectionHead
+                index="02"
+                label="Experience"
+                title="Kerja, belajar, dan menyelesaikan masalah."
+                note="Pengalaman yang membentuk cara saya berkomunikasi, membangun sistem, dan mendukung kebutuhan pengguna."
+              />
+
+              <div className="experience-list">
+                <div className="experience-line" aria-hidden="true"><span /></div>
+                {experience.map((item, index) => (
+                  <article className="experience-row" key={`${item.company}-${item.period}`} data-reveal>
+                    <span className="experience-index">0{index + 1}</span>
+                    <div className="experience-main">
+                      <h3>{item.company}</h3>
+                      <p>{item.role}</p>
+                    </div>
+                    <p className="experience-copy">{item.summary}</p>
+                    <div className="experience-meta">
+                      <span>{item.period}</span>
+                      <span>{item.location}</span>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section id="capabilities" className="section shell">
+            <SectionHead
+              index="03"
+              label="Capabilities"
+              title="Lebih dari sekadar daftar tools."
+              note="Kemampuan saya dikelompokkan berdasarkan bagaimana teknologi tersebut digunakan dalam pekerjaan."
+            />
+
+            <div className="capability-list">
+              {capabilities.map((group) => (
+                <article className="capability-row" key={group.title} data-reveal data-spotlight>
+                  <span className="capability-index">{group.index}</span>
+                  <h3>{group.title}</h3>
+                  <div className="capability-items">
+                    {group.items.map((item) => <span key={item}>{item}</span>)}
+                  </div>
+                  <ArrowUpRight size={18} />
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="profile-band">
+            <div className="shell profile-band-grid">
+              <div className="profile-band-copy" data-reveal>
+                <span className="micro-label">Profile</span>
+                <h2>{person.summary}</h2>
+                <div className="language-row">
+                  {languages.map((item) => <span key={item}>{item}</span>)}
+                </div>
+              </div>
+
+              <div className="profile-details" data-reveal>
+                <div>
+                  <span className="detail-label">Education</span>
+                  {education.map((item) => (
+                    <article key={item.school}>
+                      <h3>{item.school}</h3>
+                      <p>{item.degree}</p>
+                      <span>{item.period}</span>
+                      {item.note ? <small>{item.note}</small> : null}
+                    </article>
+                  ))}
+                </div>
+                <div>
+                  <span className="detail-label">Organizations</span>
+                  {organizations.map((item) => (
+                    <article key={`${item.name}-${item.period}`}>
+                      <h3>{item.name}</h3>
+                      <p>{item.role}</p>
+                      <span>{item.period}</span>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="credentials" className="section shell">
+            <SectionHead
+              index="04"
+              label="Credentials"
+              title="Belajar secara terukur."
+              note="Pelatihan yang mendukung kemampuan pengembangan aplikasi, keamanan digital, dan komunikasi produk."
+            />
+
+            <div className="credential-grid">
+              {certificates.map((cert, index) => {
+                const body = (
+                  <>
+                    <span className="credential-index">{String(index + 1).padStart(2, "0")}</span>
+                    <div>
+                      <h3>{cert.title}</h3>
+                      <p>{cert.issuer}</p>
+                    </div>
+                    <span className="credential-date">{cert.date}</span>
+                    <ArrowUpRight size={17} />
+                  </>
+                );
+
+                return cert.href ? (
+                  <a className="credential-card" href={cert.href} target="_blank" rel="noreferrer" key={cert.title} data-reveal>
+                    {body}
+                  </a>
+                ) : (
+                  <div className="credential-card credential-card-static" key={cert.title} data-reveal>{body}</div>
+                );
+              })}
+            </div>
+          </section>
+        </main>
+
+        <footer className="site-footer">
+          <div className="shell footer-grid">
+            <div className="footer-main" data-reveal>
+              <span className="micro-label">Let&apos;s work together</span>
+              <h2>Punya kebutuhan web atau sistem yang perlu dibuat lebih rapi?</h2>
+              <a className="footer-email magnetic" data-magnetic href={`mailto:${person.email}`}>
+                {person.email} <ArrowUpRight size={20} />
+              </a>
+            </div>
+
+            <div className="footer-contact">
               <div>
-                <h3>{item.role}</h3>
-                <strong>{item.company}</strong>
-                <p>{item.description}</p>
+                <span className="detail-label">Contact</span>
+                <a href={`mailto:${person.email}`}><Mail size={14} />{person.email}</a>
+                <span><MapPin size={14} />{person.location}</span>
               </div>
-            </article>
-          ))}
+              <div>
+                <span className="detail-label">Social</span>
+                <a href={person.links.github} target="_blank" rel="noreferrer"><Github size={14} />GitHub</a>
+                <a href={person.links.linkedin} target="_blank" rel="noreferrer"><Linkedin size={14} />LinkedIn</a>
+                <a href={person.links.instagram} target="_blank" rel="noreferrer"><Instagram size={14} />Instagram</a>
+              </div>
+            </div>
 
-          <div className="education-row">
-            <span>Pendidikan</span>
-            <div>
-              <strong>S1 Informatika · Universitas Muhammadiyah Semarang</strong>
-              <p>2022 — 2026 · IPK 3.80 / 4.00</p>
+            <div className="footer-bottom">
+              <span>© 2026 Muhammad Wahyu Anggana</span>
+              <span>Designed for web · Built for print</span>
             </div>
           </div>
-        </div>
-      </section>
+        </footer>
+      </div>
 
-      <section id="about" className="section about-section">
-        <div className="container about-grid">
-          <div>
-            <span className="section-label">About & capabilities</span>
-            <h2>
-              Saya suka pekerjaan yang membuat teknologi terasa <span>sederhana dan berguna.</span>
-            </h2>
-          </div>
-
-          <div className="about-copy">
-            <p>
-              Saya terbiasa mengembangkan website, mengolah data, dan bekerja dengan kebutuhan operasional.
-              Pendekatan saya sederhana: pahami masalahnya, rapikan alurnya, lalu bangun solusi yang mudah dipakai.
-            </p>
-          </div>
-        </div>
-
-        <div className="container skill-grid">
-          {skillGroups.map((group) => (
-            <div className="skill-column" key={group.title}>
-              <h3>{group.title}</h3>
-              <ul>
-                {group.items.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="certificates" className="section container certificate-section">
-        <div className="section-head certificate-head">
-          <span className="section-label">Certificates</span>
-          <h2>Learning archive.</h2>
-          <p>Klik sertifikat untuk membuka credential asli di Google Drive.</p>
-        </div>
-
-        <div className="certificate-grid">
-          {certs.map(([name, id], index) => (
-            <a
-              className="certificate-item"
-              key={id}
-              href={`https://drive.google.com/file/d/${id}/view`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div className="certificate-thumb">
-                <img
-                  src={`https://drive.google.com/thumbnail?id=${id}&sz=w800`}
-                  alt={`Sertifikat ${name}`}
-                  loading="lazy"
-                />
-              </div>
-              <div className="certificate-meta">
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{name}</h3>
-                <ArrowUpRight size={16} />
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section id="contact" className="contact-section">
-        <div className="container contact-grid">
-          <div>
-            <span className="section-label light">Contact</span>
-            <h2>Let&apos;s build something useful.</h2>
-            <a className="contact-email" href="mailto:wahyuanggana86@gmail.com">
-              wahyuanggana86@gmail.com <ArrowUpRight size={28} />
-            </a>
-          </div>
-
-          <div className="contact-details">
-            <a href="tel:+6282139907254"><Phone size={16} /> 0821 3990 7254</a>
-            <span><MapPin size={16} /> Semarang, Jawa Tengah</span>
-            <a href="https://www.linkedin.com/in/muhammad-wahyu-anggana-3b8120337/" target="_blank" rel="noreferrer"><Linkedin size={16} /> LinkedIn</a>
-            <a href="https://github.com/MuhammadWahyuAnggana" target="_blank" rel="noreferrer"><Github size={16} /> GitHub</a>
-            <a href="https://www.instagram.com/wahyuangganaaa/" target="_blank" rel="noreferrer"><Instagram size={16} /> Instagram</a>
-          </div>
-        </div>
-      </section>
-
-      <footer className="site-footer">
-        <div className="container footer-row">
-          <span>© 2026 Muhammad Wahyu Anggana</span>
-          <span>Built with Next.js</span>
-        </div>
-      </footer>
-    </main>
+      <PrintPortfolio />
+    </>
   );
 }
